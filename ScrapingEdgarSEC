@@ -1,0 +1,75 @@
+from lxml import html, etree
+import requests
+
+
+def sec10k_url(cik_number, date):
+        base_url = r"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="
+        list_10k = base_url + str(cik_number) + '&type=10-k&dateb=' + str(date+1) + '0601&owner=exclude&count=40&search_text='
+        page = requests.get(list_10k)
+        webpage = html.fromstring(page.content)
+        bridge = webpage.xpath('//a/@href')
+        bridge = ["https://www.sec.gov" + x for x in bridge if x[0:6] == '/Archi']
+
+        return bridge[0]
+
+
+def sec10q_url(cik_number, date, quarter=None):
+
+    base_url = r"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="
+    list_10q = base_url + str(cik_number) + '&type=10-q&dateb=' + str(date + 1) + '1231&owner=exclude&count=40&search_text='
+    page = requests.get(list_10q)
+    webpage = html.fromstring(page.content)
+    bridge = webpage.xpath('//a/@href')
+    bridge = ["https://www.sec.gov" + x for x in bridge if x[0:6] == '/Archi']
+    file10q = []
+
+    if quarter is not None:
+        for i in range(len(bridge)):
+            page10q = requests.get(bridge[i])
+            tree = etree.HTML(page10q.text)
+            element = tree.xpath('normalize-space(//*[@id="formDiv"]/div[2]/div[2]/div[2]/text())')
+            if str(date) in str(element):
+                qtr = str(element)[5:7]
+                if qtr == '01' or qtr == '02' or qtr == '03':
+                    q = '1'
+                if qtr == '04' or qtr == '05' or qtr == '06':
+                    q = '2'
+                if qtr == '07' or qtr == '08' or qtr == '09':
+                    q = '3'
+                if qtr == '10' or qtr == '11' or qtr == '12':
+                    q = '4'
+                if q == str(quarter):
+                    file10q.append(bridge[i])
+
+        return file10q[0]
+    else:
+
+        return bridge[0], bridge[1], bridge[2], bridge[3]
+
+
+def sec8k_url(cik_number, date):
+        base_url = r"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="
+        list_10k = base_url + str(cik_number) + '&type=8-k&dateb=' + str(date+1) + '0601&owner=exclude&count=40&search_text='
+        page = requests.get(list_10k)
+        webpage = html.fromstring(page.content)
+        bridge = webpage.xpath('//a/@href')
+        bridge = ["https://www.sec.gov" + x for x in bridge if x[0:6] == '/Archi']
+
+        return bridge[0]
+
+
+def sec_exhibit(link=(sec10k_url, sec10q_url, sec8k_url)):
+    resp = requests.get(link)
+    body = resp.text
+    entries = body.split("<table")[1].split("table>")[0].split("<a href=")
+    links_parsed = []
+
+    for i in range(len(entries)):
+        if i != 0 and i != len(entries):
+            raw_link = entries[i].split(">")[0]
+            last_element_in_link = raw_link.split("/")[-1]
+            if last_element_in_link != "\"":
+                link = "https://www.sec.gov" + raw_link.replace("\"", "")
+                links_parsed.append(link)
+
+    return links_parsed
