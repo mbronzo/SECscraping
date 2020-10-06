@@ -6,6 +6,7 @@ Up to now the script can return the link to the 10K, 10Q and 8K SEC webpage givi
 sec10k_url(cik_number, date) requires as argument the CIK and the year (1994,...) return the link on the SEC website
 sec10q_url(cik_number, date, quarter) requires as argument the CIK, year (1994,...), quarter (1,2,3,4) return the link on the SEC website
 sec8k_url(cik_number, date) requires as argument the CIK and the year (1994,...) return the link on the SEC website
+
 sec_exhibit(link) takes as input one of the previous function and return a list that contains all the links to the Exhibits available on the SEC website
 
 The use is really simple, just try:
