@@ -73,3 +73,14 @@ def sec_exhibit(link=(sec10k_url, sec10q_url, sec8k_url)):
                 links_parsed.append(link)
 
     return links_parsed
+    
+    
+def download_exhibits(sec_exhibit):
+
+    for i in range(len(sec_exhibit)):
+        wanted_files = urlparse(sec_exhibit[i])
+        if 'x10' in wanted_files.path or 'exh10' in wanted_files.path:
+            file = requests.get(sec_exhibit[i])
+            with open('/Users/marco/Desktop/SEC_files/exh10_' + str(i), 'wb') as f:
+                f.write(file.content)
+                f.close()
