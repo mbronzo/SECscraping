@@ -11,10 +11,15 @@ sec_exhibit(link) takes as input one of the previous function and return a list 
 The use is really simple, just try:
 
 print(sec10k_url(201493, 1994))
+
 print(sec10q_url(201493, 1994, 2))
+
 print(sec8k_url(201493, 1994))
+
 print(sec_exhibit(sec10k_url(201493, 1994)))
+
 print(sec_exhibit(sec10q_url(201493, 1994, 2)))
+
 print(sec_exhibit(sec8k_url(201493, 1994)))
 
 For any issue you can contact me at: bronzetti97@gmail.com or marco.bronzetti@studbocconi.it
