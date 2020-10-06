@@ -9,6 +9,8 @@ sec8k_url(cik_number, date) requires as argument the CIK and the year (1994,...)
 
 sec_exhibit(link) takes as input one of the previous function and return a list that contains all the links to the Exhibits available on the SEC website
 
+download_exhibit(sec_exhibit()) takes as input sec_exhibit and download the exhibits in txt version
+
 The use is really simple, just try:
 
 print(sec10k_url(201493, 1994))
