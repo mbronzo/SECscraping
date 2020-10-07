@@ -9,7 +9,15 @@ sec8k_url(cik_number, date) requires as argument the CIK and the year (1994,...)
 
 sec_exhibit(link) takes as input one of the previous function and return a list that contains all the links to the Exhibits available on the SEC website
 
-download_exhibit(sec_exhibit()) takes as input sec_exhibit and download the exhibits in txt version
+download_exhibit(sec_exhibit(), file_name) takes as input sec_exhibit and download the exhibits in txt version and ask you the name of the new file
+
+download_exhibits10(sec_exhibit, file_name) exactly as above but returns only exhibit 10
+
+file_parser(file_name, name): takes as input the file from which to parse and the name of the file in which the new infos will be stored, in this case i filter the text for specific words, due to the nature of the reasearch I am carrying out, you can easily change those strings.
+
+mongo_this(sec_exhibit, id_post) upload all the exhibits in a mongodb, it ask the id of the post and store the whole file as a value in a dictionary
+
+
 
 The use is really simple, just try:
 
