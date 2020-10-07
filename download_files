@@ -1,0 +1,26 @@
+import pandas as pd
+import ScrapingEdgarSEC as sec
+
+df1 = pd.read_excel('insert_your_path')
+company = list(df1['companyname_compustat'])
+cik = list(df1['cik'])
+year = list(df1['year'])
+quarter = list(df1['quarter'])
+cik = [int(x) for x in cik]
+
+for i in range(len(cik)):
+    try:
+        url = sec.sec10q_url(cik[i], year[i], quarter[i])
+        exhibit = sec.sec_exhibit(url)
+        list = sec.download_exhibits(exhibit, company[i])
+        for n in range(len(list)):
+            sec.file_parser(list[n], company[i] + '_' + str(year[i]))
+    except:
+        try:
+            url = sec.sec10k_url(cik[i], year[i])
+            exhibit = sec.sec_exhibit(url)
+            list = sec.download_exhibits(exhibit, company[i])
+            for n in range(len(list)):
+                sec.file_parser(list[n], company[i] + '_' + str(year[i]))
+        except:
+            pass
