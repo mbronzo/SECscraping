@@ -15,11 +15,11 @@ download_exhibit(sec_exhibit(), file_name) takes as input sec_exhibit and downlo
 
 download_exhibits10(sec_exhibit, file_name) exactly as above but returns only exhibits 10.**
 
-file_parser(file_name, name): takes as input the file from which to parse and the name of the file in which the new infos will be stored, in this case i filter the text for specific words, due to the nature of the reasearch I am carrying out, you can easily change those strings.
+file_parser(file_name, name): takes as input the file from which to parse and the name of the file in which the new info will be stored, in this case I filter the text for specific words, you can easily change those strings.
 
-mongo_this(sec_exhibit, id_post) upload all the exhibits in a mongodb, it ask the id of the post and store the whole file as a value in a dictionary
+mongo_this(sec_exhibit, id_post) upload all the exhibits in a mongodb, ask the id of the post and store the whole file similarly to a value in a dictionary
 
-The two scripts download_file and mongo_file are used to iterate the previous functions over large dataset (IT CAN TAKE LONG TIME, BUT IT IS CONSISTENT WITH SEC robots.txt) they work properly as long as you upload as df1 an excel file that contains at least 4 columns with such headers: 'companyname_compustat'; 'cik'; 'year';'quarter'.
+The two scripts download_file and mongo_file are used to iterate the previous functions over large dataset (IT CAN TAKE LONG TIME, BUT IT IS CONSISTENT WITH SEC robots.txt) they work properly as long as you upload as df1 an excel file that contains at least 4 columns with such headers: 'companyname_compustat'; 'cik'; 'year'; 'quarter'.
 
 The use is really simple, just try:
 
