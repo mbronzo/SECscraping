@@ -13,7 +13,7 @@ sec_exhibit(link) takes as input one of the previous function and return a list 
 
 download_exhibit(sec_exhibit(), file_name) takes as input sec_exhibit and download the exhibits in txt version and ask you the name of the new file
 
-download_exhibits10(sec_exhibit, file_name) exactly as above but returns only exhibit 10
+download_exhibits10(sec_exhibit, file_name) exactly as above but returns only exhibits 10.**
 
 file_parser(file_name, name): takes as input the file from which to parse and the name of the file in which the new infos will be stored, in this case i filter the text for specific words, due to the nature of the reasearch I am carrying out, you can easily change those strings.
 
