@@ -119,9 +119,9 @@ def file_parser(file_name, name):
                     wf.write(line + '\n')
 
 
-def mongo_this(sec_exhibit, id_post):
+def mongo_this(sec_exhibit, id_post, id_mongo, password_mongo):
     cluster = MongoClient(
-        "mongodb+srv://bronzom:password@cluster0.y6wkl.mongodb.net/<dbname>?retryWrites=true&w=majority")
+        "mongodb+srv://"+str(id_mongo)+':'+str(password_mongo)+"@cluster0.y6wkl.mongodb.net/<dbname>?retryWrites=true&w=majority")
     db = cluster["test"]
     collection = db["test"]
     for i in range(len(sec_exhibit)):
